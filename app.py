@@ -50,7 +50,7 @@ def login():
     if request.method == 'POST':
         username = request.form.get('username')
         password = request.form.get('password')
-        cur = mysql.connection.cursor()
+        cur = conn.cursor()
         cur.execute("SELECT * FROM users WHERE username=%s AND password=%s", (username, password))
 
         user = cur.fetchone()
