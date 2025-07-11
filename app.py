@@ -2,7 +2,6 @@ from flask import Flask,render_template,jsonify,request,redirect,url_for,session
 import pickle
 import pandas as pd
 import numpy as np
-from flask_mysqldb import MySQL
 from dotenv import load_dotenv
 import psycopg2
 import os
