@@ -5,4 +5,5 @@ flask_mysqldb==0.2.0
 python-dotenv==1.0.1
 pandas
 scikit-learn
+psycopg2-binary
 
