@@ -4,6 +4,7 @@ import pandas as pd
 import numpy as np
 from flask_mysqldb import MySQL
 from dotenv import load_dotenv
+import psycopg2
 import os
 load_dotenv()
 
@@ -14,11 +15,15 @@ with open(model_path,'rb') as file:
 app= Flask(__name__, template_folder='templates')
 app.secret_key = "SanathWonder2466"
 
-# MySQL configuration
-app.config['MYSQL_HOST'] = os.getenv('DB_HOST')
-app.config['MYSQL_USER'] = os.getenv('DB_USER')
-app.config['MYSQL_PASSWORD'] = os.getenv('DB_PASSWORD')
-app.config['MYSQL_DB'] = os.getenv('DB_NAME')
+# postgress SQL 
+
+conn = psycopg2.connect(
+    host=os.getenv('PGHOST'),
+    port=os.getenv('PGPORT'),
+    user=os.getenv('PGUSER'),
+    password=os.getenv('PGPASSWORD'),
+    dbname=os.getenv('PGDATABASE')
+)
 
 mysql = MySQL(app)
 @app.route('/signup',methods=['GET','POST'])
@@ -28,7 +33,7 @@ def signup():
         phone = request.form.get('phone_number')
         username = request.form.get('username')
         password = request.form.get('password')
-        cur = mysql.connection.cursor()
+        cur = conn.cursor()
         cur.execute("SELECT * FROM users WHERE username=%s",(username,))
         user = cur.fetchone()
         if user:
