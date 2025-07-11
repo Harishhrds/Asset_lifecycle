@@ -7,7 +7,7 @@ from dotenv import load_dotenv
 import os
 load_dotenv()
 
-model_path = os.path.join("Asset_Life_cycle_web", "asset_life.pkl")
+model_path = "asset_life.py"
 with open(model_path,'rb') as file:
     model = pickle.load(file)
 
