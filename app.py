@@ -25,7 +25,6 @@ conn = psycopg2.connect(
     dbname=os.getenv('PGDATABASE')
 )
 
-mysql = MySQL(app)
 @app.route('/signup',methods=['GET','POST'])
 def signup():
     if request.method == 'POST':
@@ -41,7 +40,7 @@ def signup():
             return render_template("signup.html")  
         cur.execute("INSERT INTO users(full_name,phone,username,password) VALUES(%s,%s,%s,%s)",
                     (full_name,phone,username,password))
-        mysql.connection.commit()
+        conn.commit()
         cur.close()
         flash("Signup Successful.Please login")
         return redirect(url_for('login'))
