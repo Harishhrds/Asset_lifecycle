@@ -6,4 +6,9 @@ python-dotenv==1.0.1
 pandas
 scikit-learn
 psycopg2-binary
-
+flask-cors
+langchain
+langchain-community
+langchain-openai
+chromadb
+pypdf
